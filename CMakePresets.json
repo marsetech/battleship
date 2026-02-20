@@ -1,0 +1,63 @@
+{
+	"version": 6,
+	"configurePresets": [
+		{
+			"name": "release",
+			"displayName": "Release (no tests)",
+			"binaryDir": "${sourceDir}/build-release",
+			"cacheVariables": {
+				"CMAKE_BUILD_TYPE": "Release",
+				"BUILD_TESTING": "OFF"
+			}
+		},
+		{
+			"name": "dev",
+			"displayName": "Development / CI",
+			"binaryDir": "${sourceDir}/build",
+			"cacheVariables": {
+				"CMAKE_BUILD_TYPE": "Release",
+				"BUILD_TESTING": "ON"
+			}
+		}
+	],
+	"buildPresets": [
+		{
+			"name": "release",
+			"configurePreset": "release"
+		},
+		{
+			"name": "dev",
+			"configurePreset": "dev"
+		}
+	],
+	"workflowPresets": [
+		{
+			"name": "build",
+			"displayName": "Full build (dev / CI)",
+			"steps": [
+				{
+					"type": "configure",
+					"name": "dev"
+				},
+				{
+					"type": "build",
+					"name": "dev"
+				}
+			]
+		},
+		{
+			"name": "release",
+			"displayName": "Build game only (no tests)",
+			"steps": [
+				{
+					"type": "configure",
+					"name": "release"
+				},
+				{
+					"type": "build",
+					"name": "release"
+				}
+			]
+		}
+	]
+}
