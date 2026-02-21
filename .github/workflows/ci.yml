@@ -1,0 +1,43 @@
+name: C++ Continuous Integration
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    name: Build & Test (Development)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install build dependencies
+        run: sudo apt-get update && sudo apt-get install -y build-essential cmake
+
+      - name: Configure project (dev preset)
+        run: cmake --preset dev
+
+      - name: Build project
+        run: cmake --build --preset dev
+
+      - name: Run tests
+        run: ctest --test-dir build --output-on-failure
+
+  build-release:
+    name: Build Release (no tests)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install build dependencies
+        run: sudo apt-get update && sudo apt-get install -y build-essential cmake
+
+      - name: Configure project (release preset)
+        run: cmake --preset release
+
+      - name: Build project
+        run: cmake --build --preset release

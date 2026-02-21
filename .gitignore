@@ -1,0 +1,26 @@
+# Build artifacts
+/build/
+
+# Cache files
+/.cache/
+/.cheat-sheet/
+
+# Local notes / private files
+/CheatSheet.txt
+/Template.txt
+
+# Makefile (deprecated)
+/Makefile
+
+# PowerPoint Presentation
+/docs/Presentation.odp
+
+# Compiled objects and dependencies
+*.o
+*.d
+
+# Executables
+*.exe
+
+# Logs
+*.log
